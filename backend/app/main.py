@@ -3,12 +3,19 @@ HeartBeat 360 — FastAPI Application Entry Point
 Initializes configuration, database, AI services, and mounts all routers.
 """
 
+import os
+import sys
+import logging
+
+# Ensure project root is always in sys.path
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
-import logging
+from fastapi.responses import FileResponse, HTMLResponse
 
 from backend.app.config import get_settings
 from backend.app.db.database import engine, Base, SessionLocal
@@ -182,11 +189,14 @@ def startup_event():
         logger.error(f"⚠️ Configuration error: {str(e)}")
         logger.error("Make sure .env file exists with HF_API_TOKEN set.")
 
-    # Create database tables (includes new AIInteraction table)
-    Base.metadata.create_all(bind=engine)
-    seed_initial_data()
+    # Create database tables (safely handled for serverless and container runtimes)
+    try:
+        Base.metadata.create_all(bind=engine)
+        seed_initial_data()
+        logger.info("✅ Database tables created and seeded.")
+    except Exception as e:
+        logger.warning(f"⚠️ Database initialization notice (handled): {str(e)}")
 
-    logger.info("✅ Database tables created and seeded.")
     logger.info("✅ HeartBeat 360 API v2.0 ready.")
     logger.info(f"   Swagger UI: http://127.0.0.1:8000/docs")
     logger.info(f"   Web Portal:  http://127.0.0.1:8000/")
@@ -232,22 +242,44 @@ if os.path.exists(frontend_dir):
 @app.get("/health", tags=["system"])
 @app.get("/healthz", tags=["system"])
 def health_check():
-    """Health check endpoint for Render, Docker, and container orchestrators."""
+    """Health check endpoint for Render, Docker, Vercel, and container orchestrators."""
     return {"status": "healthy", "service": "HeartBeat 360", "version": "2.0.0"}
 
 @app.get("/")
 def serve_index():
     index_file = os.path.join(frontend_dir, "index.html")
     if os.path.exists(index_file):
-        return FileResponse(
-            index_file,
-            headers={
-                "Cache-Control": "no-cache, no-store, must-revalidate",
-                "Pragma": "no-cache",
-                "Expires": "0"
-            }
-        )
+        try:
+            return FileResponse(
+                index_file,
+                headers={
+                    "Cache-Control": "no-cache, no-store, must-revalidate",
+                    "Pragma": "no-cache",
+                    "Expires": "0"
+                }
+            )
+        except Exception:
+            # Fallback to direct HTML read if aiofiles or FileResponse encounters serverless issue
+            try:
+                with open(index_file, "r", encoding="utf-8") as f:
+                    return HTMLResponse(
+                        content=f.read(),
+                        headers={
+                            "Cache-Control": "no-cache, no-store, must-revalidate",
+                            "Pragma": "no-cache",
+                            "Expires": "0"
+                        }
+                    )
+            except Exception:
+                pass
     return {"message": "HeartBeat 360 Backend API Operational. Access /docs for Swagger UI."}
+
+# AWS Lambda & Vercel Serverless Handler
+try:
+    from mangum import Mangum
+    handler = Mangum(app, lifespan="off")
+except Exception:
+    handler = None
 
 if __name__ == "__main__":
     import uvicorn

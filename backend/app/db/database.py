@@ -4,17 +4,27 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-if os.environ.get("VERCEL"):
-    DB_PATH = "/tmp/heartbeat360.db"
-    orig_db = os.path.join(os.path.dirname(os.path.abspath(__file__)), "heartbeat360.db")
-    if os.path.exists(orig_db) and not os.path.exists(DB_PATH):
-        try:
-            shutil.copyfile(orig_db, DB_PATH)
-        except Exception:
-            pass
-else:
-    DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "heartbeat360.db")
+def _get_db_path() -> str:
+    # If explicitly in serverless or directory is not writable, use /tmp
+    db_dir = os.path.dirname(os.path.abspath(__file__))
+    is_serverless = bool(
+        os.environ.get("VERCEL")
+        or os.environ.get("AWS_LAMBDA_FUNCTION_NAME")
+        or os.environ.get("LAMBDA_TASK_ROOT")
+        or not os.access(db_dir, os.W_OK)
+    )
+    if is_serverless:
+        tmp_db = "/tmp/heartbeat360.db"
+        orig_db = os.path.join(db_dir, "heartbeat360.db")
+        if os.path.exists(orig_db) and not os.path.exists(tmp_db):
+            try:
+                shutil.copyfile(orig_db, tmp_db)
+            except Exception:
+                pass
+        return tmp_db
+    return os.path.join(db_dir, "heartbeat360.db")
 
+DB_PATH = _get_db_path()
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 engine = create_engine(
