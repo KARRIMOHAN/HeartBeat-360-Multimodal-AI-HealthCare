@@ -229,6 +229,12 @@ if os.path.exists(frontend_dir):
         app.mount("/src", StaticFiles(directory=src_dir), name="src")
     app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
 
+@app.get("/health", tags=["system"])
+@app.get("/healthz", tags=["system"])
+def health_check():
+    """Health check endpoint for Render, Docker, and container orchestrators."""
+    return {"status": "healthy", "service": "HeartBeat 360", "version": "2.0.0"}
+
 @app.get("/")
 def serve_index():
     index_file = os.path.join(frontend_dir, "index.html")
@@ -245,4 +251,6 @@ def serve_index():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("backend.app.main:app", host="127.0.0.1", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))
+    host = os.getenv("HOST", "0.0.0.0")
+    uvicorn.run("backend.app.main:app", host=host, port=port, reload=False)

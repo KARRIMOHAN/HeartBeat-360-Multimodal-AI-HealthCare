@@ -14,7 +14,10 @@ class Settings(BaseSettings):
     """Central configuration loaded from .env at project root."""
 
     # ── Hugging Face ──
-    hf_api_token: str = Field(..., description="Hugging Face API access token")
+    hf_api_token: str = Field(
+        default_factory=lambda: os.getenv("HF_API_TOKEN") or os.getenv("HF_TOKEN") or "",
+        description="Hugging Face API access token"
+    )
     hf_provider: str = Field(default="auto", description="HF inference provider (auto, hf-inference, together, etc.)")
 
     # ── Model IDs ──
@@ -41,8 +44,8 @@ class Settings(BaseSettings):
     database_url: str = Field(default="sqlite:///backend/app/db/heartbeat360.db")
 
     # ── Server ──
-    api_host: str = Field(default="127.0.0.1")
-    api_port: int = Field(default=8000)
+    api_host: str = Field(default_factory=lambda: os.getenv("HOST", "0.0.0.0"))
+    api_port: int = Field(default_factory=lambda: int(os.getenv("PORT", "8000")))
 
     @property
     def hf_inference_url(self) -> str:
