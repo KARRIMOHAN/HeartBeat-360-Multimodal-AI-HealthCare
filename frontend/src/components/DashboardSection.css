@@ -1,0 +1,597 @@
+/* ==========================================================================
+   HeartBeat 360 — DashboardSection Styles
+   Health Tip of the Day, Safety Risk Ring, Recent Activity, & Countdown Timer
+   ========================================================================== */
+
+/* Container & Grid */
+.dashboard-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.dashboard-widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-widgets-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .dashboard-widgets-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Base Widget Card */
+.hb-widget-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.hb-widget-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 35px -10px rgba(13, 148, 136, 0.14);
+  border-color: rgba(13, 148, 136, 0.35);
+}
+
+/* Dark mode compatibility */
+body.dark .hb-widget-card {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .hb-widget-card:hover {
+  border-color: rgba(20, 184, 166, 0.4);
+}
+
+/* Widget Headers */
+.hb-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+}
+
+.hb-widget-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.hb-widget-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.hb-widget-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+body.dark .hb-widget-title {
+  color: #f8fafc;
+}
+
+.hb-widget-subtitle {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+body.dark .hb-widget-subtitle {
+  color: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
+   1. Health Tip of the Day Widget
+   -------------------------------------------------------------------------- */
+.health-tip-card {
+  min-height: 220px;
+}
+
+.health-tip-body {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(5, 150, 105, 0.04) 100%);
+  border: 1px solid rgba(13, 148, 136, 0.15);
+  border-radius: 0.875rem;
+  padding: 0.875rem 1rem;
+  margin-top: 0.25rem;
+  position: relative;
+}
+
+body.dark .health-tip-body {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(20, 184, 166, 0.2);
+}
+
+.health-tip-quote-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.health-tip-text {
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: #334155;
+  font-style: italic;
+  margin: 0;
+}
+
+body.dark .health-tip-text {
+  color: #cbd5e1;
+}
+
+.health-tip-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+body.dark .health-tip-footer {
+  border-top-color: rgba(30, 41, 59, 0.8);
+}
+
+/* Subtle fade-in animation on mount */
+@keyframes tipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-health-tip {
+  animation: tipFadeIn 0.4s ease-out forwards;
+}
+
+/* --------------------------------------------------------------------------
+   2. Safety-Status Risk Ring Widget
+   -------------------------------------------------------------------------- */
+.risk-ring-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.risk-ring-svg {
+  width: 110px;
+  height: 110px;
+  transform: rotate(-90deg);
+}
+
+.risk-ring-circle-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 8;
+}
+
+body.dark .risk-ring-circle-bg {
+  stroke: #1e293b;
+}
+
+.risk-ring-circle-fg {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-out, stroke 0.5s ease;
+}
+
+.risk-ring-center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.risk-score-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+body.dark .risk-score-value {
+  color: #f8fafc;
+}
+
+.risk-score-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.2rem;
+}
+
+.safety-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* User Health Status & Problems Widget Styles */
+.user-status-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.user-vitals-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(241, 245, 249, 0.7);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 0.625rem;
+}
+
+body.dark .user-vitals-row {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(51, 65, 85, 0.8);
+}
+
+.user-vital-pill {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #475569;
+  background: #ffffff;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(203, 213, 225, 0.7);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+body.dark .user-vital-pill {
+  background: #1e293b;
+  color: #cbd5e1;
+  border-color: #334155;
+}
+
+.user-problems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.user-problem-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.55rem;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 0.55rem;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+body.dark .user-problem-item {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(51, 65, 85, 0.8);
+}
+
+.user-problem-item:hover {
+  border-color: rgba(13, 148, 136, 0.35);
+  transform: translateX(2px);
+}
+
+.user-problem-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.user-problem-name {
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.72rem;
+}
+
+body.dark .user-problem-name {
+  color: #f1f5f9;
+}
+
+.user-problem-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.user-allergy-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.67rem;
+  color: #b45309;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+body.dark .user-allergy-bar {
+  background: rgba(120, 53, 15, 0.2);
+  border-color: rgba(180, 83, 9, 0.3);
+  color: #fcd34d;
+}
+
+/* Linked to Activity Tag on Upcoming Dose */
+.linked-activity-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.67rem;
+  font-weight: 700;
+  color: #0d9488;
+  background: #f0fdfa;
+  border: 1px solid #ccfbf1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+body.dark .linked-activity-banner {
+  background: rgba(13, 148, 136, 0.15);
+  border-color: rgba(20, 184, 166, 0.3);
+  color: #5eead4;
+}
+
+/* --------------------------------------------------------------------------
+   3. Recent Activity List Widget
+   -------------------------------------------------------------------------- */
+.activity-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.75rem;
+  background: rgba(248, 250, 252, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+  background: rgba(241, 245, 249, 0.95);
+  border-color: rgba(13, 148, 136, 0.2);
+  transform: translateX(2px);
+}
+
+body.dark .activity-item {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(51, 65, 85, 0.6);
+}
+
+body.dark .activity-item:hover {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.activity-icon-badge {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.activity-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-title-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.activity-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.dark .activity-name {
+  color: #f1f5f9;
+}
+
+.activity-time {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.activity-desc {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.dark .activity-desc {
+  color: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
+   4. Reminder Countdown Widget
+   -------------------------------------------------------------------------- */
+.countdown-box {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+  border: 1px dashed rgba(13, 148, 136, 0.35);
+  border-radius: 0.875rem;
+  padding: 0.875rem;
+  text-align: center;
+  position: relative;
+}
+
+body.dark .countdown-box {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+  border-color: rgba(20, 184, 166, 0.3);
+}
+
+.countdown-digits-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  margin: 0.5rem 0;
+}
+
+.countdown-unit-box {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+body.dark .countdown-unit-box {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+.countdown-num {
+  font-family: 'Outfit', monospace, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0d9488;
+  line-height: 1;
+}
+
+.countdown-unit-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+.countdown-sep {
+  font-weight: 800;
+  color: #0d9488;
+  font-size: 1rem;
+  animation: sepBlink 1s infinite;
+}
+
+@keyframes sepBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.taken-btn {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+}
+
+.taken-btn-active {
+  background: #0d9488;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(13, 148, 136, 0.25);
+}
+
+.taken-btn-active:hover {
+  background: #0f766e;
+  transform: translateY(-1px);
+}
+
+.taken-btn-done {
+  background: #10b981;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-health-tip,
+  .pulse-emergency,
+  .audio-bar,
+  .countdown-sep {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

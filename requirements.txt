@@ -1,0 +1,28 @@
+# ─────────────────────────────────────────────────────────────
+# HeartBeat 360 — Python Dependencies
+# ─────────────────────────────────────────────────────────────
+
+# Core Framework
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+
+# Database ORM
+sqlalchemy>=2.0.0
+
+# Configuration & Validation
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+
+# File Upload Support
+python-multipart>=0.0.6
+
+# HTTP Client (for Hugging Face API calls)
+requests>=2.31.0
+httpx>=0.24.0
+
+# Image Processing (for Vision AI)
+Pillow>=10.0.0
+
+# Hugging Face Hub (InferenceClient for model routing)
+huggingface_hub>=0.26

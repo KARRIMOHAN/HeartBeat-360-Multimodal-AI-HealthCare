@@ -1,0 +1,204 @@
+{
+  "medical_fields": [
+    {
+      "id": "mf_01",
+      "field_name": "General Medicine",
+      "description": "Primary healthcare Q&A, comprehensive consultations, wellness screenings, and medication management.",
+      "conditions": ["Common Cold & Flu", "Hypertension", "Type 2 Diabetes", "Fever & Infections", "Fatigue"],
+      "safety_tips": ["Get annual health checkups.", "Stay hydrated and eat balanced meals.", "Do not self-prescribe antibiotics."],
+      "doctor_ids": ["doc_gen_1"],
+      "symptoms_and_warnings": ["High fever lasting > 3 days", "Unexplained severe fatigue", "Sudden rapid weight loss"],
+      "emergency_guidance": "If experiencing severe confusion, high fever with stiff neck, or extreme lethargy, call emergency response."
+    },
+    {
+      "id": "mf_02",
+      "field_name": "Cardiology",
+      "description": "Heart and cardiovascular system care, blood pressure monitoring, and cardiac risk assessment.",
+      "conditions": ["Coronary Artery Disease", "High Blood Pressure", "Arrhythmia", "Heart Failure", "Hyperlipidemia"],
+      "safety_tips": ["Monitor BP daily if diagnosed.", "Limit sodium intake to under 2,000mg/day.", "Engage in 30 mins moderate daily cardio."],
+      "doctor_ids": ["doc_card_1"],
+      "symptoms_and_warnings": ["Chest tightness or pressure", "Pain radiating to jaw or left arm", "Shortness of breath on exertion"],
+      "emergency_guidance": "CHEST PAIN EMERGENCY: Crushing chest pain or pressure requires IMMEDIATE emergency assistance (Dial 911 / 112)."
+    },
+    {
+      "id": "mf_03",
+      "field_name": "Dermatology",
+      "description": "Skin, hair, and nail health, rash evaluation, acne treatment, and lesion monitoring.",
+      "conditions": ["Eczema & Dermatitis", "Psoriasis", "Acne Vulgaris", "Fungal Skin Infections", "Skin Lesions & Moles"],
+      "safety_tips": ["Apply SPF 30+ sunscreen daily.", "Avoid picking or popping inflammatory acne.", "Monitor changes in mole size and shape (ABCDE rule)."],
+      "doctor_ids": ["doc_derm_1"],
+      "symptoms_and_warnings": ["Rapidly spreading red rash", "Skin lesions that bleed or change color", "Blistering with fever"],
+      "emergency_guidance": "Sudden widespread skin blistering or facial swelling with difficulty breathing requires immediate emergency care."
+    },
+    {
+      "id": "mf_04",
+      "field_name": "Dentistry",
+      "description": "Oral hygiene, tooth pain evaluation, gum disease treatment, and dental preventive procedures.",
+      "conditions": ["Tooth Decay (Caries)", "Gingivitis & Periodontitis", "Tooth Abscess", "Bruxism (Teeth Grinding)", "Sensitivity"],
+      "safety_tips": ["Brush twice daily with fluoride toothpaste.", "Floss daily between teeth.", "Visit a dentist every 6 months."],
+      "doctor_ids": ["doc_dent_1"],
+      "symptoms_and_warnings": ["Severe throbbing tooth pain", "Facial swelling around jaw", "Pus discharge from gums"],
+      "emergency_guidance": "Facial swelling spreading to eye or neck from tooth infection is an emergency; seek immediate hospital or dental triage."
+    },
+    {
+      "id": "mf_05",
+      "field_name": "Pediatrics",
+      "description": "Comprehensive health, growth tracking, and vaccination management for infants, children, and adolescents.",
+      "conditions": ["Childhood Asthma", "Otitis Media (Ear Infection)", "Chickenpox / Measles", "Growth Delay", "Infant Colic"],
+      "safety_tips": ["Keep childhood vaccination schedules up to date.", "Store all medicines in childproof locked cabinets.", "Ensure adequate hydration during fever."],
+      "doctor_ids": ["doc_ped_1"],
+      "symptoms_and_warnings": ["High fever in infants under 3 months", "Lethargy or unresponsiveness", "Stridor / difficulty breathing"],
+      "emergency_guidance": "High fever in newborns (< 90 days) or severe respiratory distress in infants requires urgent ER evaluation."
+    },
+    {
+      "id": "mf_06",
+      "field_name": "Gynecology",
+      "description": "Women’s reproductive health, menstrual disorders, prenatal guidance, and hormonal wellness.",
+      "conditions": ["PCOS & Endometriosis", "Menstrual Irregularities", "Pregnancy Care", "UTI & Vaginitis", "Menopause Management"],
+      "safety_tips": ["Schedule annual Pap smear screenings as recommended.", "Track menstrual cycles routinely.", "Maintain pelvic floor exercises."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Heavy bleeding soaking > 2 pads/hour", "Severe acute lower abdominal pain", "High fever during pregnancy"],
+      "emergency_guidance": "Severe lower abdominal pain with fainting or heavy pregnancy bleeding requires immediate emergency transport."
+    },
+    {
+      "id": "mf_07",
+      "field_name": "Orthopedics",
+      "description": "Bone, joint, ligament, and skeletal system diagnosis, fracture care, and arthritis management.",
+      "conditions": ["Osteoarthritis", "Bone Fractures", "ACL & Ligament Tears", "Carpal Tunnel Syndrome", "Scoliosis"],
+      "safety_tips": ["Maintain calcium and Vitamin D intake.", "Practice proper lifting techniques.", "Wear protective gear during sports."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Inability to bear weight on limb", "Visible bone deformity", "Sudden severe joint swelling"],
+      "emergency_guidance": "Open fractures or limb numbness after trauma are medical emergencies; immobilize limb and call emergency response."
+    },
+    {
+      "id": "mf_08",
+      "field_name": "Physiotherapy",
+      "description": "Rehabilitation therapy, post-surgical recovery, spinal mobility, and ergonomic alignment.",
+      "conditions": ["Post-Op Joint Recovery", "Chronic Back & Neck Pain", "Frozen Shoulder", "Sciatica", "Stroke Rehab"],
+      "safety_tips": ["Perform prescribed exercises daily.", "Take regular movement breaks during desk work.", "Maintain posture alignment."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Loss of bowel/bladder control with back pain", "Sudden leg weakness", "Severe shooting numbness"],
+      "emergency_guidance": "Sudden loss of bowel or bladder control with back pain may indicate Cauda Equina Syndrome; seek emergency ER care immediately."
+    },
+    {
+      "id": "mf_09",
+      "field_name": "Psychiatry/Psychology",
+      "description": "Mental health assessment, mood regulation, anxiety treatment, and psychological support.",
+      "conditions": ["Major Depressive Disorder", "Generalized Anxiety", "Bipolar Disorder", "PTSD", "Insomnia"],
+      "safety_tips": ["Maintain consistent sleep hygiene.", "Practice mindfulness and deep breathing.", "Reach out for professional support early."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Thoughts of self-harm or suicide", "Severe prolonged insomnia", "Panic attacks with hyperventilation"],
+      "emergency_guidance": "If experiencing suicidal crisis or acute panic breakdown, immediately contact the Suicide & Crisis Lifeline (988) or emergency services."
+    },
+    {
+      "id": "mf_10",
+      "field_name": "Neurology",
+      "description": "Brain, spinal cord, and nerve disorder evaluation, migraine care, and seizure management.",
+      "conditions": ["Migraine & Tension Headaches", "Epilepsy & Seizures", "Parkinson’s Disease", "Multiple Sclerosis", "Peripheral Neuropathy"],
+      "safety_tips": ["Maintain a headache/trigger diary.", "Never skip anti-epileptic medications.", "Protect head with helmets during biking."],
+      "doctor_ids": ["doc_neuro_1"],
+      "symptoms_and_warnings": ["Sudden \"thunderclap\" headache", "Facial drooping or slurred speech (FAST)", "Loss of vision in one eye"],
+      "emergency_guidance": "STROKE ALERT: Sudden facial drooping, arm weakness, or slurred speech requires IMMEDIATE stroke center emergency care."
+    },
+    {
+      "id": "mf_11",
+      "field_name": "Pulmonology",
+      "description": "Respiratory system health, lung function testing, asthma guidance, and COPD therapy.",
+      "conditions": ["Asthma", "COPD & Emphysema", "Pneumonia", "Bronchitis", "Sleep Apnea"],
+      "safety_tips": ["Avoid smoking and secondhand smoke.", "Use rescue inhalers exactly as prescribed.", "Get annual flu and pneumococcal vaccines."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Cyanosis (blue lips or nails)", "Inability to speak in full sentences due to breathlessness", "Chest wall indrawing"],
+      "emergency_guidance": "Severe asthma attack with blue lips or gasping for air is a lifethreatening emergency. Call 911 immediately."
+    },
+    {
+      "id": "mf_12",
+      "field_name": "Gastroenterology",
+      "description": "Digestive system, liver, stomach, and bowel disease diagnosis and nutritional absorption care.",
+      "conditions": ["GERD / Acid Reflux", "Irritable Bowel Syndrome (IBS)", "Peptic Ulcer Disease", "Fatty Liver Disease", "Crohn’s & Colitis"],
+      "safety_tips": ["Eat small, frequent fiber-rich meals.", "Limit excessive NSAID painkiller use.", "Avoid lying down for 2 hours post-meal."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Vomiting blood or coffee-ground material", "Black tarry stools", "Severe acute right-lower abdominal pain"],
+      "emergency_guidance": "Vomiting blood or severe right-lower quadrant stomach pain (possible appendicitis) requires emergency room triage."
+    },
+    {
+      "id": "mf_13",
+      "field_name": "Nephrology",
+      "description": "Kidney health, filtration monitoring, electrolyte balance, and chronic kidney disease management.",
+      "conditions": ["Chronic Kidney Disease (CKD)", "Kidney Stones", "Glomerulonephritis", "Diabetic Nephropathy", "Electrolyte Imbalance"],
+      "safety_tips": ["Drink 2 to 2.5 liters of water daily.", "Control blood sugar and blood pressure.", "Avoid unnecessary over-the-counter NSAIDs."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Sudden decrease in urination", "Severe flank pain radiating to groin", "Swelling in feet and face (edema)"],
+      "emergency_guidance": "Sudden complete absence of urine output or severe excruciating flank pain needs immediate emergency evaluation."
+    },
+    {
+      "id": "mf_14",
+      "field_name": "Urology",
+      "description": "Urinary tract, bladder, and male reproductive health evaluation and minimally invasive procedures.",
+      "conditions": ["Urinary Tract Infections (UTI)", "Benign Prostatic Hyperplasia (BPH)", "Bladder Incontinence", "Prostatitis", "Hydrocele"],
+      "safety_tips": ["Complete the full course of prescribed antibiotics.", "Do not hold urine for extended periods.", "Maintain prostate health checks after age 50."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Gross hematuria (blood in urine)", "Inability to pass urine", "High fever with severe chills and flank pain"],
+      "emergency_guidance": "Acute urinary retention (unable to urinate despite fullness) is an emergency requiring catheter relief."
+    },
+    {
+      "id": "mf_15",
+      "field_name": "Oncology",
+      "description": "Cancer screening, chemotherapy guidance, side-effect management, and supportive oncology care.",
+      "conditions": ["Breast Cancer Screening", "Lung & Colorectal Cancer", "Lymphoma & Leukemia", "Chemotherapy Side Effects", "Radiation Recovery"],
+      "safety_tips": ["Adhere strictly to oncologic appointment schedules.", "Report post-chemo fever immediately.", "Maintain high nutritional calorie support."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Fever > 100.4°F (38°C) while on chemotherapy", "Severe intractable nausea/vomiting", "Unexplained lump"],
+      "emergency_guidance": "Neutropenic fever during chemotherapy is a medical emergency requiring urgent IV antibiotics at the hospital."
+    },
+    {
+      "id": "mf_16",
+      "field_name": "Ophthalmology",
+      "description": "Eye care, vision testing, glaucoma screening, cataract evaluation, and retinal health.",
+      "conditions": ["Cataract", "Glaucoma", "Diabetic Retinopathy", "Conjunctivitis (Pink Eye)", "Dry Eye Syndrome"],
+      "safety_tips": ["Wear protective eyewear during hazardous activities.", "Take 20-20-20 screen breaks.", "Get annual dilated eye exams if diabetic."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Sudden painless vision loss", "Flashes of light or shower of floaters", "Severe eye pain with redness and halos"],
+      "emergency_guidance": "Sudden vision loss or flashes/curtain over vision (retinal detachment / acute glaucoma) requires emergency eye surgery triage."
+    },
+    {
+      "id": "mf_17",
+      "field_name": "ENT",
+      "description": "Ear, Nose, and Throat diagnostics, sinus management, hearing evaluation, and voice care.",
+      "conditions": ["Sinusitis", "Tonsillitis & Pharyngitis", "Vertigo & Inner Ear Disorders", "Tinnitus & Hearing Loss", "Nasal Polyps"],
+      "safety_tips": ["Never insert cotton swabs deep into ear canals.", "Humidify room air during sinus infections.", "Protect ears from loud (>85dB) noise."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Sudden unilateral hearing loss", "Inability to swallow saliva due to throat swelling", "Severe nosebleed > 20 mins"],
+      "emergency_guidance": "Throat swelling causing difficulty swallowing or breathing is an airway emergency. Call 911 immediately."
+    },
+    {
+      "id": "mf_18",
+      "field_name": "Endocrinology",
+      "description": "Hormone balance, thyroid disorder management, blood sugar control, and metabolic health.",
+      "conditions": ["Type 1 & Type 2 Diabetes", "Hypothyroidism / Hyperthyroidism", "Osteoporosis", "Adrenal Insufficiency", "Pituitary Disorders"],
+      "safety_tips": ["Check blood glucose as advised.", "Take thyroid medications on an empty stomach in the morning.", "Carry fast-acting glucose for hypos."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Severe hypoglycemia (sweating, confusion, shakiness)", "Kussmaul breathing / fruity breath (DKA)", "Extreme thirst and urination"],
+      "emergency_guidance": "Diabetic Ketoacidosis (DKA) or unresponsiveness from low blood sugar requires immediate emergency glucagon/ER care."
+    },
+    {
+      "id": "mf_19",
+      "field_name": "Nutrition and Dietetics",
+      "description": "Clinical nutrition counseling, meal planning for chronic diseases, weight management, and deficiency care.",
+      "conditions": ["Malnutrition / Vitamin Deficiencies", "Obesity & Metabolic Syndrome", "Renal / Diabetic Meal Planning", "Celiac Disease", "Food Intolerances"],
+      "safety_tips": ["Prioritize whole, unprocessed foods.", "Ensure balanced macronutrients per meal.", "Consult a dietitian for custom therapeutic diets."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Rapid involuntary weight loss > 10% in 1 month", "Severe electrolyte imbalance from purging", "Extreme weakness"],
+      "emergency_guidance": "Severe dehydration or electrolyte crash needs urgent IV rehydration."
+    },
+    {
+      "id": "mf_20",
+      "field_name": "Emergency Medicine",
+      "description": "First-aid protocols, trauma triage, acute resuscitation guidance, and emergency transport coordination.",
+      "conditions": ["Trauma & Fractures", "Acute Anaphylaxis", "Poisoning & Overdose", "Severe Heat Stroke", "Cardiac Arrest"],
+      "safety_tips": ["Keep emergency contact numbers saved.", "Maintain a certified Home First-Aid Kit.", "Learn CPR and AED operation."],
+      "doctor_ids": [],
+      "symptoms_and_warnings": ["Loss of consciousness", "Uncontrollable bleeding", "Severe chest pain or stroke signs"],
+      "emergency_guidance": "FOR ALL LIFE-THREATENING EMERGENCIES: IMMEDIATELY DIAL LOCAL EMERGENCY HOTLINE (911 / 112 / 102)."
+    }
+  ]
+}

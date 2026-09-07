@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // User helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    // 1. Users collection: users can read & update only their own document
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // 2. Appointments collection: patients can read/write their own appointments
+    match /appointments/{appointmentId} {
+      allow read, write: if isAuthenticated() && (
+        resource == null || resource.data.patient_id == request.auth.uid || request.resource.data.patient_id == request.auth.uid
+      );
+    }
+
+    // 3. Reminders collection: users can read/write their own health reminders
+    match /reminders/{reminderId} {
+      allow read, write: if isAuthenticated() && (
+        resource == null || resource.data.user_id == request.auth.uid || request.resource.data.user_id == request.auth.uid
+      );
+    }
+
+    // 4. Doctors collection: public read, admin write
+    match /doctors/{doctorId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 5. Medical Fields collection: public read, admin write
+    match /medical_fields/{fieldId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 6. Medicines collection: public read, admin write
+    match /medicines/{medicineId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 7. Content collection: public read, admin write
+    match /content/{contentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
