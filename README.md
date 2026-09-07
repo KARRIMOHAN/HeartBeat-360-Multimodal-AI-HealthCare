@@ -30,3 +30,13 @@ cd flutter_app
 flutter pub get
 flutter run
 ```
+
+## 🚀 Cloud Deployment
+
+See [`DEPLOYMENT.md`](file:///c:/Users/kmoha/Downloads/care%20bridge%20360%20multimodel%20healthcare/DEPLOYMENT.md) for complete step-by-step guides on:
+- **Render** (Recommended 1-click GitHub deployment for FastAPI + Web Portal)
+- **Railway** (Automated Docker container deployment)
+- **Docker / Cloud VPS** (Self-hosted production deployment)
+- **Hugging Face Spaces** (Dr. HeartBeat Gradio AI Medical Consultant)
+- **Flutter Mobile App Build** (Android APK & iOS)
+
