@@ -4,6 +4,18 @@ This guide covers step-by-step instructions to deploy **HeartBeat 360** (Backend
 
 ---
 
+## ⚡ Option 1: Deploy on Vercel (FastAPI Serverless)
+
+Vercel natively supports FastAPI using `pyproject.toml` or root `main.py`:
+
+1. Go to [vercel.com](https://vercel.com/) and click **Add New...** ➔ **Project**.
+2. Import `KARRIMOHAN/HeartBeat-360-Multimodal-AI-HealthCare`.
+3. Under **Environment Variables**, add:
+   - `HF_API_TOKEN`: Your Hugging Face token.
+   - `PYTHONUNBUFFERED`: `1`
+4. Click **Deploy**. Vercel will automatically build and host your FastAPI app and frontend!
+
+
 ## 🚀 Option 1: Deploy Web Platform on Render (Recommended - Free & Easiest)
 
 Render can automatically build and host the FastAPI backend + React/HTML5 Web Portal directly from your GitHub repository.
